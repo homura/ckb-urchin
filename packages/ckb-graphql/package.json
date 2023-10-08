@@ -6,7 +6,7 @@
   "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "postinstall": "ts-node src/_scripts/postinstall.ts",
+    "postinstall": "bun src/_scripts/postinstall.ts",
     "codegen": "graphql-codegen --config codegen.yml",
     "dev-server:local": "CKB_RPC=http://127.0.0.1:8114 npm run dev-server",
     "dev-server:testnet": "CKB_RPC=https://testnet.ckb.dev npm run dev-server",
