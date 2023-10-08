@@ -43,6 +43,9 @@ type OutPoint {
   index: Uint32!
 }
 
+"""
+The input cell, aka the UTXO(Unspent Transaction Output)
+"""
 type CellInput {
   previousOutput: OutPoint!
   since: Uint64!
@@ -54,7 +57,11 @@ enum DepType {
   DepGroup
 }
 
+"""
+A transaction is composed of a set of inputs and outputs
+"""
 type Transaction {
+  "A blake2b hash of the serialized transactions"
   hash: H256!
   version: Version!
   cellDeps: [CellDep!]!

@@ -11,18 +11,26 @@
     "dev-server:local": "CKB_RPC=http://127.0.0.1:8114 npm run dev-server",
     "dev-server:testnet": "CKB_RPC=https://testnet.ckb.dev npm run dev-server",
     "dev-server:mainnet": "CKB_RPC=https://mainnet.ckb.dev npm run dev-server",
-    "dev-server": "ts-node src/_scripts/dev-server.ts",
-    "build": "tsc --project tsconfig.build.json"
+    "dev-server": "bun src/_scripts/dev-server.ts",
+    "build": "npm run postinstall && tsc --project tsconfig.build.json"
   },
   "dependencies": {
     "@ckb-lumos/rpc": "0.20.0-alpha.3",
     "@graphql-tools/schema": "^10.0.0",
-    "@graphql-typed-document-node/core": "^3.2.0"
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "dataloader": "^2.2.2",
+    "lru_map": "^0.4.1"
   },
   "devDependencies": {
     "@apollo/server": "^4.7.5",
     "@graphql-codegen/typescript": "^4.0.1",
     "@graphql-codegen/typescript-resolvers": "^4.0.1",
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.18",
+    "apollo-server-express": "^3.12.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "graphql": "^16.7.1"
   }
 }

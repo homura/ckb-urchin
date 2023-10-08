@@ -1,6 +1,8 @@
 import { RPC } from '@ckb-lumos/rpc';
 import DataLoader from 'dataloader';
-import { LRUMap } from 'lru_map';
+import * as lru from 'lru_map';
+
+const LRUMap = lru.LRUMap;
 
 export interface Options {
   url: string;

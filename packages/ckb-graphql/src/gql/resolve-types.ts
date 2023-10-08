@@ -63,6 +63,7 @@ export type CellDep = {
   outPoint: OutPoint;
 };
 
+/** The input cell, aka the UTXO(Unspent Transaction Output) */
 export type CellInput = {
   __typename?: 'CellInput';
   cellOutput?: Maybe<CellOutput>;

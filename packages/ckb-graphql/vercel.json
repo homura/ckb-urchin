@@ -1,0 +1,4 @@
+{
+  "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }],
+  "installCommand": "cd ../.. && pnpm install && cd packages/ckb-graphql && npm run build"
+}
