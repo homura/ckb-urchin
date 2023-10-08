@@ -1,0 +1,52 @@
+{
+  "name": "urchin-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@chakra-ui/css-reset": "^2.1.2",
+    "@chakra-ui/icons": "^2.0.19",
+    "@chakra-ui/react": "^2.7.1",
+    "@chakra-ui/theme": "^3.1.2",
+    "@ckb-lumos/base": "^0.19.0",
+    "@ckb-lumos/bi": "^0.19.0",
+    "@ckb-lumos/helpers": "^0.19.0",
+    "@ckb-lumos/rpc": "0.20.0-alpha.3",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/inconsolata": "^5.0.4",
+    "@fontsource-variable/roboto-mono": "^5.0.5",
+    "@graphql-tools/schema": "^10.0.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@tanstack/react-query": "^4.29.19",
+    "@types/numeral": "^2.0.2",
+    "ckb-graphql": "workspace:*",
+    "dataloader": "^2.2.2",
+    "dayjs": "^1.11.9",
+    "framer-motion": "^6.5.1",
+    "graphql": "^16.7.1",
+    "jotai": "^2.2.1",
+    "jotai-tanstack-query": "^0.7.1",
+    "lru_map": "^0.4.1",
+    "numeral": "^2.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-middle-ellipsis": "^1.2.2",
+    "react-router-dom": "^6.14.1",
+    "react-use": "^17.4.0",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.3.9"
+  }
+}

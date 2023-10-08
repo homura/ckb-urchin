@@ -1,0 +1,28 @@
+{
+  "name": "ckb-graphql",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "postinstall": "ts-node src/_scripts/postinstall.ts",
+    "codegen": "graphql-codegen --config codegen.yml",
+    "dev-server:local": "CKB_RPC=http://127.0.0.1:8114 npm run dev-server",
+    "dev-server:testnet": "CKB_RPC=https://testnet.ckb.dev npm run dev-server",
+    "dev-server:mainnet": "CKB_RPC=https://mainnet.ckb.dev npm run dev-server",
+    "dev-server": "ts-node src/_scripts/dev-server.ts",
+    "build": "tsc --project tsconfig.build.json"
+  },
+  "dependencies": {
+    "@ckb-lumos/rpc": "0.20.0-alpha.3",
+    "@graphql-tools/schema": "^10.0.0",
+    "@graphql-typed-document-node/core": "^3.2.0"
+  },
+  "devDependencies": {
+    "@apollo/server": "^4.7.5",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-resolvers": "^4.0.1",
+    "graphql": "^16.7.1"
+  }
+}

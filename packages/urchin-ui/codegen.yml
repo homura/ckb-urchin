@@ -1,0 +1,28 @@
+# This configuration file tells GraphQL Code Generator how
+# to generate types based on our schema.
+schema: ../ckb-graphql/ckb.graphql
+documents:
+  - './src/**/*.ts'
+  - './src/**/*.tsx'
+generates:
+  ./src/gql/:
+    preset: client
+    config:
+      enumValues:
+        ScriptHashType: ckb-graphql#ScriptHashType
+        DepType: ckb-graphql#DepType
+      scalars:
+        Version: string
+        Timestamp: string
+        BlockNumber: string
+        EpochNumberWithFraction: string
+        ProposalShortId: string
+
+        H256: string
+        Byte32: string
+        JsonBytes: string
+        Capacity: string
+
+        Uint32: string
+        Uint64: string
+        Uint128: string

@@ -1,0 +1,29 @@
+# This configuration file tells GraphQL Code Generator how
+# to generate types based on our schema.
+schema: './ckb.graphql'
+generates:
+  ./src/gql/resolve-types.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      namingConvention:
+        enumValues: keep
+      enumValues:
+        ScriptHashType: ../types.js#ScriptHashType
+        DepType: ../types.js#DepType
+      scalars:
+        Version: string
+        Timestamp: string
+        BlockNumber: string
+        EpochNumberWithFraction: string
+        ProposalShortId: string
+
+        H256: string
+        Byte32: string
+        JsonBytes: string
+        Capacity: string
+
+        Uint32: string
+        Uint64: string
+        Uint128: string
