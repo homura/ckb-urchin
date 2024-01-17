@@ -18,7 +18,10 @@ export const SearchBar: React.FC = () => {
         <InputLeftElement pointerEvents="none">
           <SearchIcon color="gray.300" />
         </InputLeftElement>
-        <Input placeholder="Block Hash / Transaction Hash / Address / Block Number" />
+        <Input
+          isDisabled
+          placeholder="Block Hash / Transaction Hash / Address / Block Number"
+        />
       </InputGroup>
     </FormControl>
   );

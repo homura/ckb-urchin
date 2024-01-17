@@ -12,9 +12,12 @@ export const CkbAddressLink: FC<{ script: Script }> = ({ script }) => {
   const { network } = useAtomValue(configAtom);
   const prefix = network === 'mainnet' ? 'ckb' : 'ckt';
 
-  const address = encodeToAddress(script, {
-    config: { PREFIX: prefix, SCRIPTS: {} },
-  });
+  const address = encodeToAddress(
+    { ...script },
+    {
+      config: { PREFIX: prefix, SCRIPTS: {} },
+    },
+  );
 
   return (
     <ChakraLink

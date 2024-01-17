@@ -60,6 +60,7 @@ export type CellDep = {
   outPoint: OutPoint;
 };
 
+/** The input cell, aka the UTXO(Unspent Transaction Output) */
 export type CellInput = {
   __typename?: 'CellInput';
   cellOutput?: Maybe<CellOutput>;
@@ -167,6 +168,7 @@ export type QueryTransactionArgs = {
 export type Script = {
   __typename?: 'Script';
   args: Scalars['JsonBytes']['output'];
+  /** The hash for locating the code binary */
   codeHash: Scalars['H256']['output'];
   hashType: ScriptHashType;
 };
@@ -178,11 +180,13 @@ export enum ScriptHashType {
   Type = 'type'
 }
 
+/** A transaction is composed of a set of inputs and outputs */
 export type Transaction = {
   __typename?: 'Transaction';
   block?: Maybe<Block>;
   cellDeps: Array<CellDep>;
   cycles?: Maybe<Scalars['Uint64']['output']>;
+  /** A blake2b hash of the serialized transactions */
   hash: Scalars['H256']['output'];
   headerDeps: Array<Scalars['H256']['output']>;
   inputs: Array<CellInput>;
@@ -207,6 +211,13 @@ export type UncleBlock = {
   proposals: Array<Scalars['ProposalShortId']['output']>;
 };
 
+export type BockByNumberQueryVariables = Exact<{
+  blockNumber: Scalars['Uint64']['input'];
+}>;
+
+
+export type BockByNumberQuery = { __typename?: 'Query', block?: { __typename?: 'Block', header: { __typename?: 'Header', hash: string, number: string }, transactions: Array<{ __typename?: 'Transaction', hash: string, inputs: Array<{ __typename?: 'CellInput', cellOutput?: { __typename?: 'CellOutput', capacity: string, lock: { __typename?: 'Script', codeHash: string, hashType: ScriptHashType, args: string }, type?: { __typename?: 'Script', codeHash: string, hashType: ScriptHashType, args: string } | null } | null, previousOutput: { __typename?: 'OutPoint', txHash: string, index: string } }>, outputs: Array<{ __typename?: 'CellOutput', capacity: string, lock: { __typename?: 'Script', codeHash: string, hashType: ScriptHashType, args: string }, type?: { __typename?: 'Script', codeHash: string, hashType: ScriptHashType, args: string } | null }> }> } | null };
+
 export type TxByHashQueryVariables = Exact<{
   txHash: Scalars['H256']['input'];
 }>;
@@ -215,4 +226,5 @@ export type TxByHashQueryVariables = Exact<{
 export type TxByHashQuery = { __typename?: 'Query', transaction?: { __typename?: 'Transaction', hash: string, cycles?: string | null, status?: TxStatus | null, block?: { __typename?: 'Block', header: { __typename?: 'Header', number: string, timestamp: string } } | null, inputs: Array<{ __typename?: 'CellInput', previousOutput: { __typename?: 'OutPoint', txHash: string }, cellOutput?: { __typename?: 'CellOutput', capacity: string, lock: { __typename?: 'Script', codeHash: string, hashType: ScriptHashType, args: string } } | null }>, outputs: Array<{ __typename?: 'CellOutput', capacity: string, lock: { __typename?: 'Script', codeHash: string, hashType: ScriptHashType, args: string } }> } | null };
 
 
+export const BockByNumberDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BockByNumber"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"blockNumber"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Uint64"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"block"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"height"},"value":{"kind":"Variable","name":{"kind":"Name","value":"blockNumber"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"header"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hash"}},{"kind":"Field","name":{"kind":"Name","value":"number"}}]}},{"kind":"Field","name":{"kind":"Name","value":"transactions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hash"}},{"kind":"Field","name":{"kind":"Name","value":"inputs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cellOutput"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"capacity"}},{"kind":"Field","name":{"kind":"Name","value":"lock"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"codeHash"}},{"kind":"Field","name":{"kind":"Name","value":"hashType"}},{"kind":"Field","name":{"kind":"Name","value":"args"}}]}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"codeHash"}},{"kind":"Field","name":{"kind":"Name","value":"hashType"}},{"kind":"Field","name":{"kind":"Name","value":"args"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"previousOutput"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"txHash"}},{"kind":"Field","name":{"kind":"Name","value":"index"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"outputs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"capacity"}},{"kind":"Field","name":{"kind":"Name","value":"lock"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"codeHash"}},{"kind":"Field","name":{"kind":"Name","value":"hashType"}},{"kind":"Field","name":{"kind":"Name","value":"args"}}]}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"codeHash"}},{"kind":"Field","name":{"kind":"Name","value":"hashType"}},{"kind":"Field","name":{"kind":"Name","value":"args"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BockByNumberQuery, BockByNumberQueryVariables>;
 export const TxByHashDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"TxByHash"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"txHash"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"H256"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"transaction"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"hash"},"value":{"kind":"Variable","name":{"kind":"Name","value":"txHash"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hash"}},{"kind":"Field","name":{"kind":"Name","value":"block"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"header"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"cycles"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"inputs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"previousOutput"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"txHash"}}]}},{"kind":"Field","name":{"kind":"Name","value":"cellOutput"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"capacity"}},{"kind":"Field","name":{"kind":"Name","value":"lock"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"codeHash"}},{"kind":"Field","name":{"kind":"Name","value":"hashType"}},{"kind":"Field","name":{"kind":"Name","value":"args"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"outputs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"capacity"}},{"kind":"Field","name":{"kind":"Name","value":"lock"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"codeHash"}},{"kind":"Field","name":{"kind":"Name","value":"hashType"}},{"kind":"Field","name":{"kind":"Name","value":"args"}}]}}]}}]}}]}}]} as unknown as DocumentNode<TxByHashQuery, TxByHashQueryVariables>;
